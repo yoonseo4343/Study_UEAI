@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NavigationInvokerComponent.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "UEAICharacter.generated.h"
@@ -44,9 +45,18 @@ class AUEAICharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	// Invoker 세팅
+	UPROPERTY(BlueprintReadWrite,Category=Navigation,meta=(AllowPrivateAccess="true"))
+	UNavigationInvokerComponent* NavInvoker;
+	
 public:
 	AUEAICharacter();
 	
+	// 네비게이션 메시 생성 반경
+	float NavGenerationRadius;
+	
+	// 네비게이션 메시 제거 반경
+	float NavRemovalRadius;
 
 protected:
 
@@ -68,5 +78,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
+	// Returns NavInvoker subobject
+	FORCEINLINE class UNavigationInvokerComponent* GetNavInvoker() const { return NavInvoker; }
 };
 

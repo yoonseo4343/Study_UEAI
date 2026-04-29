@@ -52,6 +52,15 @@ AUEAICharacter::AUEAICharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+	
+	// 활성화될 범위 설정. 테스트를 위해 매우 작은 값 부여
+	NavGenerationRadius = 10.0f;
+	NavRemovalRadius = 15.0f;
+	
+	// Navigation Invoker 컴포넌트 생성 및 초기값 셋업
+	NavInvoker=CreateDefaultSubobject<UNavigationInvokerComponent>(TEXT("NavInvoker"));
+	// SetGenerationRadii 함수를 사용하여 생성 반경과 제거 반경 설정. protected 멤버변수이므로 함수를 통해 수정 필요
+	NavInvoker->SetGenerationRadii(NavGenerationRadius, NavRemovalRadius);
 }
 
 //////////////////////////////////////////////////////////////////////////
